@@ -87,10 +87,10 @@ if($_SESSION['user'] == '') {
 <form action="login_action.php" method="Post" name="f">
 <table border="1">
 <tr>
-<td><span class="maintext">Username:</span></td><td><input type="Text" name="psEmail" value="ben@app.com"/></td>
+<td><span class="maintext">Username:</span></td><td><input type="text" name="psEmail" value="ben@app.com"/></td>
 </tr>
 <tr>
-<td><span class="maintext">Password:</span></td><td><input type="password" name="psPassword" value="password"/></td>
+<td><span class="maintext">Password:</span></td><td><input type="text" name="psPassword" value="password"/></td>
 </tr>
 <tr>
 <td colspan="2"><input type="submit" value="Login" /></td>
