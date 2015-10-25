@@ -3,32 +3,29 @@ include_once("session.php");
 
 // Check if the information has been filled in
 if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
-  // No login information
-  header('Location: index.php');
+  // No login information, or one was empty
+  header('Location: index.php?message='.'something was empty');
 } else {
   // Authenticate user
   //START PRIVATE
-  
-  $sQuery = "Select email, sGUID From users Where email = '$_REQUEST[psEmail]' And password = '$_REQUEST[psPassword]'";
 
-  // print("1<br>");
+  $username = $_REQUEST[psEmail];
+  $password = $_REQUEST[psPassword];
+  
+  $sQuery = "SELECT email, sGUID FROM users WHERE email = '$username' AND password = '$password'";
+
+  
   if( $mysqli->multi_query($sQuery) )
   {
-    // print("1a<br>");
     $result = mysqli_store_result($mysqli);
-    // print_r($result);
-    // print( $result->num_rows );
     if( $result->num_rows )
     {
-      // print("1b<br>");
-      // print_r($result);
-      // $result=mysqli_store_result($mysqli);
       $aResult=mysqli_fetch_row($result);
 
 
       // Update the user record
       $sss = session_id();
-      $sQuery = "Update users Set sGUID = '$sss' Where email = '$aResult[0]'";
+      $sQuery = "UPDATE users SET sGUID = '$sss' WHERE email = '$aResult[0]'";
 
 
       $mysqli->query($sQuery);
@@ -42,7 +39,5 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
   // Not authenticated
   header('Location: index.php?message='.'wrong email or password');
   die();
-  
-  //END PRIVATE
 }
 ?>

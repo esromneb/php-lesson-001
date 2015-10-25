@@ -68,6 +68,11 @@ h1 {
 	font-size: 2em;
 }
 
+.lightred {
+	color: #FF8484;
+	font-size: 1em;
+}
+
 table {
 	table-layout: fixed;
 	width: 800px;

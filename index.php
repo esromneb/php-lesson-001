@@ -12,7 +12,7 @@ include_once("session.php");
 </head>
 <body>
 <h1>PHP MySql injection demonstration</h1>
-<p>This page looks like it's just a login page.
+<p>This page looks like an ordinary login page.
 <ul>
 <li>first try to login with the username "ben@app.com" and password "password"
 <li>second try and login with the sql injection that the site taught you
@@ -30,6 +30,7 @@ $query = "SELECT email, dirty_secret FROM `users` WHERE 1";
 
 
 $count = 0;
+$table_down = 0;
 if($result = $mysqli->query($query) )
 {
 	// print_r($result);
@@ -37,16 +38,29 @@ if($result = $mysqli->query($query) )
 		// echo $row['email'];
 		$count++;
 	}
+} else {
+	
+	if( strpos($mysqli->error, "Table") !== False )
+	{
+		$table_down = 1;
+		print "<div class='red'>Website and database critical, user table not found</div>";
+	}
 }
 
 
 // print_r($hResult);
-if($count) {
-	$site_ok = 1;
-	print "<div class='green'>Website ok</div>";
-} else {
-	$site_ok = 0;
-	print "<div class='red'>Website fail, no users found</div>";
+if( !$table_down )
+{
+	if($count == 3) {
+		$site_ok = 1;
+		print "<div class='green'>Website ok</div>";
+	} elseif($count > 0) {
+		$site_ok = 0;
+		print "<div class='red'>Website sick, missing users</div>";
+	} else {
+		$site_ok = 0;
+		print "<div class='red'>Website fail, no users found</div>";
+	}
 }
 
 
@@ -75,7 +89,7 @@ Not Logged in
 <?php
 if($_REQUEST['message'] != '')
 {
-	print "<h3 class='red'>".$_REQUEST['message']."</h3>";
+	print "<h4 class='lightred'>".$_REQUEST['message']."</h4>";
 }
 ?>
 <br>
