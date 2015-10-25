@@ -12,7 +12,7 @@ include_once("session.php");
 
 
 $admin_logged = 0;
-$query = "SELECT * FROM `users` WHERE email = 'admin@example.com'";
+$query = "SELECT * FROM `users` WHERE email = 'admin@app.com'";
 if($result = $mysqli->query($query) )
 {
 	$row = $result->fetch_assoc();
