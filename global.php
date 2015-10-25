@@ -1,5 +1,7 @@
 <?php
 
+$_ENV["VCAP_SERVICES"] = '{"cleardb":[{"name":"ClearDB MySQL Database-nk","label":"cleardb","tags":["Data Stores","data_management","ibm_third_party"],"plan":"spark","credentials":{"jdbcUrl":"jdbc:mysql://us-cdbr-iron-east-03.cleardb.net/ad_ecf663f6b8c39da?user=ba803a6929aec0&password=863189ea","uri":"mysql://ba803a6929aec0:863189ea@us-cdbr-iron-east-03.cleardb.net:3306/ad_ecf663f6b8c39da?reconnect=true","name":"ad_ecf663f6b8c39da","hostname":"us-cdbr-iron-east-03.cleardb.net","port":"3306","username":"ba803a6929aec0","password":"863189ea"}}]}';
+
 if(!$_ENV["VCAP_SERVICES"]){ //local dev
     $mysql_server_name = "127.0.0.1:3306";
     $mysql_username = "root";

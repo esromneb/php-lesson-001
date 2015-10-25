@@ -2,7 +2,6 @@
 header("Cache-control: private"); // Fix refresh lag
 include_once("session.php");
 
-//include_once("database_connect.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,12 +25,15 @@ include_once("session.php");
 
 
 
-$sub_query = "SELECT email, dirty_secret FROM `users` WHERE 1";
+$query = "SELECT email, dirty_secret FROM `users` WHERE 1";
 
-$sub_result = mysql_query($sub_query, $hDB);
+$result = $mysqli->query($query);
+print_r($result);
+print($result);
+die();
 // print $sub_result;
 $count = 0;
-while ($row = mysql_fetch_assoc($sub_result)) {
+while ($row = $result->fetch_assoc()) {
 	// echo $row['email'];
 	$count++;
 }
