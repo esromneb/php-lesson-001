@@ -1,0 +1,14 @@
+---
+declared-services:
+  php-mysql-db:
+    label: cleardb
+    plan: spark
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: eu-gb.mybluemix.net
+  name: pool-3
+  host: pool-3
+  disk_quota: 1024M
+  buildpack: php_buildpack
