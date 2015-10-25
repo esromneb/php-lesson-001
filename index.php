@@ -11,13 +11,10 @@ include_once("session.php");
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<h1>PHP MySql injection demonstration</h1>
-<p>This page looks like an ordinary login page.
-<ul>
-<li>first try to login with the username "ben@app.com" and password "password"
-<li>second try and login with the sql injection that the site taught you
-</ul>
-</p>
+
+
+
+<h1>A totally ordinary website</h1>
 
 
 <h2>Website Status:</h2>
@@ -115,19 +112,14 @@ if($_REQUEST['message'] != '')
 if($_SESSION['user'] == '') {
 ?>
 
+
+
 <form action="login_action.php" method="Post" name="f">
-<table border="1">
-<tr>
-<td><span class="maintext">Username:</span></td><td><input type="text" name="psEmail" value="ben@app.com"/></td>
-</tr>
-<tr>
-<td><span class="maintext">Password:</span></td><td><input type="text" name="psPassword" value="password"/></td>
-</tr>
-<tr>
-<td colspan="2"><input type="submit" value="Login" /></td>
-</tr>
-<input type="hidden" name="psRefer" value="<?php echo($_REQUEST['refer']) ?>">
-</table>
+<span class="maintext">Username:&nbsp;&nbsp;</span><input type="text" name="psEmail" value="ben@app.com"><br>
+<span class="maintext">Password:&nbsp;&nbsp;</span><input type="text" name="psPassword" value="password" style=""><br>
+<br>
+<input type="submit" value="Login">
+<input type="hidden" name="psRefer" value="">
 </form>
 
 <?php
