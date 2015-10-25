@@ -12,9 +12,9 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
   $email = $_REQUEST[psEmail];
   $password = $_REQUEST[psPassword];
   
-  $sQuery = "SELECT email, sGUID FROM users WHERE email = '$email' AND password = '$password'";
+  $sql = "SELECT email, sGUID FROM users WHERE email = '$email' AND password = '$password'";
 
-  if( $mysqli->multi_query($sQuery) )
+  if( $mysqli->multi_query($sql) )
   {
     $result = mysqli_store_result($mysqli);
     if( $result->num_rows )
