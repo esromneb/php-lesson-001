@@ -5,9 +5,10 @@ include_once("session.php");
 
 /*
  *   0 not started
- *   1 logged in as admin
- *   2 any users dropped
- *   3 database dropped
+ *   1 logged in as user
+ *   2 logged in as admin
+ *   3 any users dropped
+ *   4 database dropped
  */
 
 
@@ -24,6 +25,27 @@ if($result = $mysqli->query($query) )
 		}
 	}
 }
+
+
+
+
+$user_logged = 0;
+$query = "SELECT * FROM `users` WHERE email = 'ben@app.com'";
+if($result = $mysqli->query($query) )
+{
+	$row = $result->fetch_assoc();
+	if($row)
+	{
+		if($row['login_count'] != 0)
+		{
+			$user_logged = 1;
+		}
+	}
+}
+
+
+
+
 
 
 $query = "SELECT email, dirty_secret FROM `users` WHERE 1";
@@ -60,12 +82,13 @@ if( !$table_down )
 
 if( $table_down )
 {
-	print "3";
+	print "4";
 } elseif ($count != 3)
 {
+	print "3";
+} elseif ($admin_logged) {
 	print "2";
-} elseif ($admin_logged)
-{
+} elseif ($user_logged) {
 	print "1";
 } else {
 	print "0";
