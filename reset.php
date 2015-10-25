@@ -1,8 +1,11 @@
 <?php
 
-$hDB = mysql_connect('localhost', 'root', 'toor');
+include_once("global.php");
+
+
+$hDB = mysql_connect($mysql_server_name, $mysql_username, $mysql_password);
 if (!$hDB) die("Couldn't connect to MySQL");
-mysql_select_db('getwiththe', $hDB) or die("Couldn't open $db: ".mysql_error());
+mysql_select_db($mysql_database, $hDB) or die("Couldn't open $db: ".mysql_error());
 
 $sql = "DROP TABLE IF EXISTS `users`;";
 $hResult = mysql_query($sql, $hDB);
