@@ -7,10 +7,7 @@ if(!$_ENV["VCAP_SERVICES"]){ //local dev
     $mysql_database = "test";
 } else { //running in Bluemix
     $vcap_services = json_decode($_ENV["VCAP_SERVICES" ]);
-    if($vcap_services->{'mysql-5.5'}){ //if "mysql" db service is bound to this application
-        $db = $vcap_services->{'mysql-5.5'}[0]->credentials;
-    } 
-    else if($vcap_services->{'cleardb'}){ //if cleardb mysql db service is bound to this application
+    if($vcap_services->{'cleardb'}){ //if cleardb mysql db service is bound to this application
         $db = $vcap_services->{'cleardb'}[0]->credentials;
     } 
     else { 
