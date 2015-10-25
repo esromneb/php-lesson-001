@@ -27,15 +27,16 @@ include_once("session.php");
 
 $query = "SELECT email, dirty_secret FROM `users` WHERE 1";
 
-$result = $mysqli->query($query);
-print_r($result);
-print($result);
-die();
-// print $sub_result;
+
+
 $count = 0;
-while ($row = $result->fetch_assoc()) {
-	// echo $row['email'];
-	$count++;
+if($result = $mysqli->query($query) )
+{
+	// print_r($result);
+	while ($row = $result->fetch_assoc()) {
+		// echo $row['email'];
+		$count++;
+	}
 }
 
 

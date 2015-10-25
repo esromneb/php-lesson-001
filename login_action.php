@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once("session.php");
 
 // Check if the information has been filled in
 if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
@@ -8,12 +8,6 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
 } else {
   // Authenticate user
   //START PRIVATE
-  $hDB = mysql_connect('localhost', 'root', 'toor');
-  if (!$hDB) die("Couldn't connect to MySQL");
-  mysql_select_db('getwiththe', $hDB) or die("Couldn't open $db: ".mysql_error());
-
-
-  $mysqli = new mysqli('localhost', 'root', 'toor', 'getwiththe');
   
   $sQuery = "Select email, sGUID From users Where email = '$_REQUEST[psEmail]' And password = '$_REQUEST[psPassword]'";
 
@@ -37,7 +31,7 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
       $sQuery = "Update users Set sGUID = '$sss' Where email = '$aResult[0]'";
 
 
-      mysql_query($sQuery, $hDB);
+      $mysqli->query($sQuery);
 
       $_SESSION['user'] = $_POST['psEmail'];
 

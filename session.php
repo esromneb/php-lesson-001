@@ -2,7 +2,7 @@
 session_start();
 include_once("global.php");
 
-$sGUID = $_SESSION['session_id'];
+$sGUID = isset($_SESSION['session_id']) ? $_SESSION['session_id'] : "";
 //START PRIVATE
 
 
