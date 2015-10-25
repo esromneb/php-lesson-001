@@ -26,15 +26,16 @@ $sql = "CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) NOT NULL,
   `dirty_secret` longtext NOT NULL,
   `sGUID` varchar(255) NOT NULL,
+  `login_count` int(11) NOT NULL,
   PRIMARY KEY (`autoinc`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;";
 $mysqli->query($sql);
 
 
-$sql = "INSERT INTO `users` (`autoinc`, `email`, `password`, `dirty_secret`, `sGUID`) VALUES
-(1, 'admin@example.com', 'password2', 'I like to develop code on production', 'teqfdrrpv6jbo7qens3kpebir7'),
-(2, 'benathon@getwiththeapp.club', 'whatabadpassword', 'I like to store passwords in plaintext in my database', ''),
-(3, 'ben@app.com', 'password', 'I registered with an email that I don''t own', 'teqfdrrpv6jbo7qens3kpebir7');";
+$sql = "INSERT INTO `users` (`autoinc`, `email`, `password`, `dirty_secret`, `sGUID`, `login_count`) VALUES
+(1, 'admin@example.com', 'password2', 'I like to test buggy code on production servers', '', 0),
+(2, 'benathon@getwiththeapp.club', 'whatabadpassword', 'I like to store passwords in plaintext in my database', '', 0),
+(3, 'ben@app.com', 'password', 'I registered with an email that I don''t own', '', 0);";
 $mysqli->query($sql);
 
 header('Location: index.php');

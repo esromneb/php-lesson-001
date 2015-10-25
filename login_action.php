@@ -9,12 +9,11 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
   // Authenticate user
   //START PRIVATE
 
-  $username = $_REQUEST[psEmail];
+  $email = $_REQUEST[psEmail];
   $password = $_REQUEST[psPassword];
   
-  $sQuery = "SELECT email, sGUID FROM users WHERE email = '$username' AND password = '$password'";
+  $sQuery = "SELECT email, sGUID FROM users WHERE email = '$email' AND password = '$password'";
 
-  
   if( $mysqli->multi_query($sQuery) )
   {
     $result = mysqli_store_result($mysqli);
@@ -22,12 +21,25 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
     {
       $aResult=mysqli_fetch_row($result);
 
+      do { 
+        $mysqli->use_result(); 
+      }while( $mysqli->more_results() && $mysqli->next_result() );
 
-      // Update the user record
+
+      // Update the user record for session id
       $sss = session_id();
-      $sQuery = "UPDATE users SET sGUID = '$sss' WHERE email = '$aResult[0]'";
+      $sQuery = "UPDATE users SET sGUID = '$sss' WHERE email = '$email'";
+      $mysqli->query($sQuery);
 
 
+      do { 
+        $mysqli->use_result(); 
+      }while( $mysqli->more_results() && $mysqli->next_result() );
+
+
+
+      // Update the login count
+      $sQuery = "UPDATE users SET login_count = login_count + 1 WHERE email = '$email'";
       $mysqli->query($sQuery);
 
       $_SESSION['user'] = $_POST['psEmail'];

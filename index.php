@@ -56,7 +56,7 @@ if( !$table_down )
 		print "<div class='green'>Website ok</div>";
 	} elseif($count > 0) {
 		$site_ok = 0;
-		print "<div class='red'>Website sick, missing users</div>";
+		print "<div class='red'>Website sick: missing users, only found $count</div>";
 	} else {
 		$site_ok = 0;
 		print "<div class='red'>Website fail, no users found</div>";
@@ -71,7 +71,21 @@ if( !$table_down )
 
 
 if($_SESSION['user'] != '') {
-print "logged in as:<br>".$_SESSION['user'];
+	print "logged in as:<br> <p class='leftbuf'>".$_SESSION['user']."</p>";
+
+	$sql = "SELECT dirty_secret FROM `users` WHERE email = '$_SESSION[user]' ";
+
+	if($result = $mysqli->query($sql) )
+	{
+		// print_r($result);
+	    $row = $result->fetch_assoc();
+	    if($row)
+		{
+			print "My Secret:<br> <p class='leftbuf'>".$row['dirty_secret']."</p>";
+		}
+	}
+
+
 ?>
 <br>
 <a href="logout.php">Logout</a>

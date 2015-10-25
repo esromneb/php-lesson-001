@@ -73,6 +73,10 @@ h1 {
 	font-size: 1em;
 }
 
+.leftbuf {
+	padding-left: 25px;
+}
+
 table {
 	table-layout: fixed;
 	width: 800px;
