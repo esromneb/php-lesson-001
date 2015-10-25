@@ -18,7 +18,7 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
   //   $sQuery = "Select iUser, MD5(UNIX_TIMESTAMP() + iUser + RAND(UNIX_TIMESTAMP())) sGUID, sAccess From tblUsers Where sEmail = '$_REQUEST[psEmail]' and sPassword = '$cheater_user[0]'";
   // }
   // else{
-    $sQuery = "Select email, MD5(UNIX_TIMESTAMP() + email + RAND(UNIX_TIMESTAMP())) sGUID From users Where email = '$_REQUEST[psEmail]' And password = '$_REQUEST[psPassword]'";
+    $sQuery = "Select email, sGUID From users Where email = '$_REQUEST[psEmail]' And password = '$_REQUEST[psPassword]'";
   // }
   $hResult = mysql_query($sQuery, $hDB);
   // die($hResult);

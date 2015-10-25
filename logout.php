@@ -2,7 +2,8 @@
 session_start(); // provides db as $hDB
 include_once("session.php");
 
-$sQuery = "Update users Set sGUID = '' Where sGUID = '$_SESSION[session_id]'";
+$sss = session_id();
+$sQuery = "Update users Set sGUID = '' Where sGUID = '$sss'";
 
 mysql_query($sQuery, $hDB);
 

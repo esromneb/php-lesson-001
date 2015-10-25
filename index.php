@@ -1,5 +1,4 @@
 <?php
-$RequiredSecurityLevel = 0;
 header("Cache-control: private"); // Fix refresh lag
 include_once("session.php");
 
