@@ -27,12 +27,15 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
     // print_r($aResult);
     // die();
     // Update the user record
-    $sQuery = "Update users Set sGUID = '$aResult[1]' Where email = $aResult[0]";
+    $sss = session_id();
+    $sQuery = "Update users Set sGUID = '$sss' Where email = '$aResult[0]'";
+
+    // die($sQuery);
 
     mysql_query($sQuery, $hDB);
     // Set the cookie and redirect
-    setcookie("session_id", $aResult[1]);
-    $_SESSION['session_id'] = session_id();
+    // setcookie("session_id", $aResult[1]);
+    // $_SESSION['session_id'] = session_id();
     $_SESSION['user'] = $_POST['psEmail'];
     // if($_REQUEST['psRefer'] == "")
     //   {
@@ -42,12 +45,12 @@ if($_REQUEST['psEmail'] == '' || $_REQUEST['psPassword'] == '') {
  //      {
 	// $_REQUEST['psRefer'] = '/?p=organizer';
  //      }
-      header('Location: index.php?message='.'logged in');
+      header('Location: index.php?');//message='.'logged in');
     //   print("<html><head><title>Logging you in</title><meta http-equiv=\"REFRESH\" content=\"1;URL=$psRefer\" /></head><body><span class=\"maintext\">Logging you in</span><body></html>");
     //    print $psRefer;
   } else {
     // Not authenticated
-        header('Location: index.php?message='.'not logged in');
+        header('Location: index.php?message='.'wrong email or password');
   }
   //END PRIVATE
 }
